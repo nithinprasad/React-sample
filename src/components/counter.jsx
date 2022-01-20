@@ -1,28 +1,27 @@
 import React, { Component } from "react";
+import { decrement, increment, deleteRecord } from "../state/actions";
 class Counter extends React.Component {
-  
-  
-
   render() {
-     
+    const dispatch=this.props.dispatch;
     return (
+      
       <React.Fragment>
         <div className="container">
           <span className={this.getBadeClasses()}>{this.formatCount()} </span>
           <button
-            onClick={()=>this.props.onIncrement(this.props.id)}
+            onClick={() =>dispatch(increment(this.props.id))}
             className="btn btn-primary m-2"
           >
             Increment
           </button>
           <button
-            onClick={()=>this.props.onDecrement(this.props.id)}
+            onClick={() => dispatch(decrement(this.props.id))}
             className="btn btn-success m-2"
           >
             Decrement
           </button>
           <button
-            onClick={()=>this.props.onDelete(this.props.id)}
+            onClick={() =>dispatch(deleteRecord(this.props.id))}
             className="btn btn-danger m-2"
           >
             Delete
@@ -32,8 +31,6 @@ class Counter extends React.Component {
     );
   }
 
-  
-
   getBadeClasses() {
     let classes = "badge rounded-pill m-2 bg-";
     classes += this.props.value <= 0 ? "warning" : "primary";
@@ -41,7 +38,7 @@ class Counter extends React.Component {
   }
 
   formatCount() {
-    const  value   = this.props.value;
+    const value = this.props.value;
     return value === 0 ? "ZERO" : value;
   }
 }
